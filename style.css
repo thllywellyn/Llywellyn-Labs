@@ -118,15 +118,22 @@ span {
   font-size: 1.6rem;
 }
 
+.social-icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .social-icons a{
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   background-color: transparent;
   border: 0.2rem solid var(--main-color);
-  font-size: 2rem;
+  font-size: 2.5rem;
   border-radius: 50%;
   color: var(--main-color);
   margin: 3rem 1.5rem 3rem 0;
@@ -331,6 +338,21 @@ span {
     display: block;
     font-size: 2rem;
     margin: 3rem 0;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+  
+  .social-icons a {
+    width: 6rem;
+    height: 6rem;
+    font-size: 3rem;
+    margin: 2rem 1rem;
+  }
+  
+  .home-content {
+    text-align: center;
   }
 }
 
