@@ -66,10 +66,37 @@ body{
   border-bottom: 3px solid var(--main-color);
 }
 
-#menu-icon{
+.menu-icon-container {
   font-size: 3.6rem;
   color: var(--text-color);
   display: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: 0.3s ease;
+}
+
+.menu-icon-container.active {
+  transform: rotate(90deg);
+}
+
+#menu-icon {
+  display: block;
+}
+
+#close-icon {
+  display: none;
+}
+
+.menu-icon-container.active #menu-icon {
+  display: none;
+}
+
+.menu-icon-container.active #close-icon {
+  display: block;
+}
+
+.navbar {
+  transition: 0.5s ease;
 }
 
 section{
@@ -340,23 +367,51 @@ span {
   #menu-icon {
     display: block;
   }
+  
   .navbar {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    padding: 1rem 3%;
-    background: rgba(0,0,0,0.9);
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    padding: 8rem 2rem;  /* Reduced top padding */
+    background: rgba(25, 25, 25, 0.95);
     backdrop-filter: blur(10px);
-    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Changed from flex-start */
+    justify-content: flex-start;
+    transition: 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
   }
+  
   .navbar.active {
-    display: block;
+    right: 0;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
   }
+  
   .navbar a {
     display: block;
-    font-size: 1.8rem;  /* Reduced from 2rem */
+    font-size: 2.2rem;
     margin: 3rem 0;
+    padding: 1.5rem 0;
+    text-align: center;
+    opacity: 1;
+    color: #fff;
+    font-weight: 400;
+    letter-spacing: 1px;
+    width: 100%;
+    border-bottom: none;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar.active a {
+    opacity: 1;
+  }
+  
+  .navbar a:hover,
+  .navbar a.active {
+    color: var(--main-color);
   }
   
   .home-content h1 {
@@ -389,6 +444,10 @@ span {
   .home-content {
     text-align: center;
   }
+
+  .menu-icon-container {
+    display: block;
+  }
 }
 
 @media (max-width: 450px) {
@@ -402,5 +461,9 @@ span {
   .about-img {
     width: 60vw;  /* Reduced from 70vw */
     height: 60vw;  /* Reduced from 70vw */
+  }
+  .navbar {
+    width: 280px;
+    right: -280px;
   }
 }

@@ -1,17 +1,21 @@
 function toggleMenu() {
   const menu = document.querySelector(".navbar");
-  const icon = document.querySelector(".hamburger-icon");
-  menu.classList.toggle("active");
-  icon.classList.toggle("active");
+  const iconContainer = document.querySelector(".menu-icon-container");
+  if (menu && iconContainer) {
+    menu.classList.toggle("active");
+    iconContainer.classList.toggle("active");
+    document.body.style.overflow = menu.classList.contains("active") ? "hidden" : "auto";
+  }
 }
 
 // Close menu when clicking outside
 document.addEventListener('click', (e) => {
   const menu = document.querySelector(".navbar");
-  const icon = document.querySelector(".hamburger-icon");
-  if (!menu.contains(e.target) && !icon.contains(e.target)) {
+  const iconContainer = document.querySelector(".menu-icon-container");
+  if (menu && iconContainer && !menu.contains(e.target) && !iconContainer.contains(e.target)) {
     menu.classList.remove("active");
-    icon.classList.remove("active");
+    iconContainer.classList.remove("active");
+    document.body.style.overflow = "auto";
   }
 });
 
