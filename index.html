@@ -10,102 +10,44 @@
   </head>
   <body>
     <header class="header">
-      <a href="#home" class="logo">
-        <img src="assets/LLYWELLYN LABS WHITE.png" alt="">
-        <!-- <span>Llywellyn</span>Labs -->
+      <a href="#home" class="logo" aria-label="Llywellyn Labs Logo">
+        <img src="assets/LLYWELLYN LABS WHITE.png" alt="Llywellyn Labs Logo" loading="lazy">
       </a>
 
-      <i class='bx bx-menu' id="menu-icon"></i>
+      <i class='bx bx-menu' id="menu-icon" aria-label="Toggle menu"></i>
 
-      <nav class="navbar">
-        <!-- <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a> -->
-        <a href="mailto:me@lsanalab.xyz">Contact</a>
+      <nav class="navbar" role="navigation">
+        <a href="mailto:me@lsanalab.xyz" aria-label="Contact">Contact</a>
       </nav>
     </header>
 
-    <section class="home" id="home">
-      <div class="home-content">
-        <h3>Hi,</h3>
-        <h1>I'm Llywellyn Sana,</h1>
-        <h3><span>Freelancer</span></h3>
-        <p>
-          I specialize in social media management, website development, domain management, customized email solutions, and much more. 
-          Explore my work and connect with me through my socials to learn more about how I can help elevate your brand!
-        </p>
+    <main>
+      <section class="home" id="home">
+        <div class="home-content">
+          <h3>Hi,</h3>
+          <h1>I'm Llywellyn Sana,</h1>
+          <h3><span>Freelancer</span></h3>
+          <p>
+            I specialize in social media management, website development, domain management, customized email solutions, and much more. 
+            Explore my work and connect with me through my socials to learn more about how I can help elevate your brand!
+          </p>
 
-        <div class="social-icons">
-          <a href="https://www.instagram.com/thllywellyn"><i class='bx bxl-instagram-alt'></i></a>
-          <a href="https://www.linkedin.com/in/thllywellyn"><i class='bx bxl-linkedin-square'></i></a>
-          <a href="https://x.com/thllywellyn/"><i class='bx bxl-twitter'></i></a>
-          <a href="https://github.com/thllywellyn"><i class='bx bxl-github'></i></a>
+          <div class="social-icons" role="navigation" aria-label="Social media links">
+            <a href="https://www.instagram.com/thllywellyn" aria-label="Instagram"><i class='bx bxl-instagram-alt'></i></a>
+            <a href="https://www.linkedin.com/in/thllywellyn" aria-label="LinkedIn"><i class='bx bxl-linkedin-square'></i></a>
+            <a href="https://x.com/thllywellyn/" aria-label="Twitter"><i class='bx bxl-twitter'></i></a>
+            <a href="https://github.com/thllywellyn" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+          </div>
+          <div>
+            <a href="mailto:me@lsanalab.xyz">
+              <button class="btn">Know More</button>
+            </a>
+          </div>
         </div>
-        <div>
-          <a href="mailto:me@lsanalab.xyz">
-            <button class="btn">Know More</button>
-          </a>
-          <!-- <button class="btn">Know More</button> -->
+        <div class="home-img">
+          <img src="assets/profile-pic.jpg" alt="Llywellyn Sana" loading="lazy">
         </div>
-
-      </div>
-      <div class="home-img">
-        <img src="assets/profile-pic.jpg" alt="">
-      </div>
-    </section>
-
-    <!-- <section class="about" id="about">
-      <div class="about-img">
-        <img src="assets/profile-pic.jpg" alt="">
-      </div>
-      <div class="about-content">
-        <h2 class="heading">About <span>Me</span></h2>
-        <h3>Frontend <span>Developer</span></h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius similique a nemo excepturi laborum repudiandae aliquid, culpa, aspernatur repellendus corrupti ducimus earum iure fugiat deleniti natus! Ipsa labore doloribus aliquam?
-        </p>
-        <a href="#" class="btn-2">Experience</a>
-      </div>
-    </section> -->
-    
-    <!-- 
-    <section class="contact-form">
-      <h2 class="contact-me">Contact <span>Me</span></h2>
-
-      <form action="#">
-        <div class="input-box">
-          <input type="text" placeholder="Full Name">
-          <input type="email" placeholder="Email">
-        </div>
-        <div class="input-box">
-          <input type="number" placeholder="Phone Number">
-          <input type="text" placeholder="Subject">
-        </div>
-        <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-        <input type="submit" value="Send Message" class="btn-1">
-      </form>
-    </section>
-    
-
-    <footer class="footer">
-
-      <div class="social">
-        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-        <a href="#"><i class='bx bxl-linkedin-square'></i></a>
-        <a href="#"><i class='bx bxl-twitter'></i></a>
-        <a href="#"><i class='bx bxl-github'></i></a>
-      </div>
-
-      <ul class="list">
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">About Me</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-      </ul>
-      <p class="copyright">© 2024 Llywellyn Sana | All Rights Reserved</p>
-    </footer>
-    -->
+      </section>
+    </main>
   </body>
 </html>
