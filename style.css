@@ -311,6 +311,24 @@ span {
   color: white;
 }
 
+.instagram {
+  background: var(--bg-color);
+  padding: 10rem 9% 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 4rem;
+  margin-bottom: 5rem;
+  color: var(--text-color);
+}
+
+.instagram-feed {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
 /* Media Queries */
 @media (max-width: 1200px) {
   html {
@@ -447,6 +465,10 @@ span {
 
   .menu-icon-container {
     display: block;
+  }
+
+  .section-title {
+    font-size: 3rem;
   }
 }
 
