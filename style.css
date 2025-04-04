@@ -28,7 +28,7 @@ body{
   top: 0;
   left: 0;
   width: 100%;
-  padding: 3rem 9%;
+  padding: 2rem 9%;  /* Reduced from 3rem */
   background: rgba(0,0,0,0.4);
   backdrop-filter: blur(40px);
   border-bottom: 1px solid rgba(166,166,166,0.2);
@@ -52,7 +52,7 @@ body{
 }
 
 .navbar a{
-  font-size: 1.8rem;
+  font-size: 1.6rem;  /* Reduced from 1.8rem */
   color: white;
   margin-left: 4rem;
   font-weight: 500;
@@ -110,12 +110,12 @@ span {
 }
 .home-img img{
   position: relative;
-  width: 35vw;
+  width: 30vw;  /* Reduced from 35vw */
   border-radius: 50%;
 }
 
 .home-content p{
-  font-size: 1.6rem;
+  font-size: 2rem;  /* Increased from 1.6rem */
 }
 
 .social-icons {
@@ -179,7 +179,7 @@ span {
 }
 .about-img img{
   position: relative;
-  width: 35vw;
+  width: 30vw;  /* Reduced from 35vw */
   border-radius: 50%;
 }
 .heading{
@@ -192,7 +192,7 @@ span {
 }
 .about-content p{
   color: white;
-  font-size: 20px;
+  font-size: 2.2rem;  /* Increased from 20px */
   margin: 2em 0 3em;
 }
 .contact-form h2{
@@ -299,21 +299,40 @@ span {
     padding: 2rem 3%;
   }
   section {
-    padding: 10rem 3% 2rem;
+    padding: 15rem 3% 2rem;  /* Increased from 10rem to 15rem */
   }
   .home {
     flex-direction: column-reverse;
   }
+  .home-img {
+    width: 40vw;  /* Reduced from 50vw */
+    height: 40vw;  /* Reduced from 50vw */
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .home-img img {
-    width: 70vw;
-    margin-top: 4rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .about {
     flex-direction: column-reverse;
     gap: 5rem;
   }
+  .about-img {
+    width: 40vw;  /* Reduced from 50vw */
+    height: 40vw;  /* Reduced from 50vw */
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .about-img img {
-    width: 70vw;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -336,8 +355,24 @@ span {
   }
   .navbar a {
     display: block;
-    font-size: 2rem;
+    font-size: 1.8rem;  /* Reduced from 2rem */
     margin: 3rem 0;
+  }
+  
+  .home-content h1 {
+    font-size: 5rem;  /* Reduced from 7rem */
+  }
+  
+  .home-content h3 {
+    font-size: 2.5rem;  /* Reduced from 3.2rem */
+  }
+  
+  .home-content h3:nth-of-type(2) {
+    font-size: 3rem;  /* Reduced from 4rem */
+  }
+  
+  .home-content p {
+    font-size: 1.8rem;  /* Increased from 1.6rem */
   }
   
   .social-icons {
@@ -362,5 +397,10 @@ span {
   }
   .logo img {
     width: 30vw;
+  }
+  .home-img,
+  .about-img {
+    width: 60vw;  /* Reduced from 70vw */
+    height: 60vw;  /* Reduced from 70vw */
   }
 }
