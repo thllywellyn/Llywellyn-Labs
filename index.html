@@ -10,8 +10,23 @@
     <meta property="og:description" content="Freelance services in social media management, website development, domain management, and email solutions">
     <meta property="og:image" content="assets/LLYWELLYN LABS WHITE.png">
     <meta property="og:url" content="https://lsanalab.xyz">
+    <meta name="theme-color" content="#FF4500">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Llywellyn Labs">
+    
     <title>Llywellyn Labs</title>
-    <link rel="icon" href="https://webf.lsanalab.xyz/favicon.ico">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,13 +39,8 @@
     
     <header class="header">
       <a href="#home" class="logo" aria-label="Llywellyn Labs Logo">
-        <img src="assets/LLYWELLYN LABS WHITE.png" alt="Llywellyn Labs Logo" loading="lazy">
+        <img src="assets/LLYWELLYN LABS WHITE.png" alt="Llywellyn Labs Logo" class="theme-logo" loading="lazy">
       </a>
-
-      <div class="menu-icon-container" onclick="toggleMenu()">
-        <i class='bx bx-menu' id="menu-icon"></i>
-        <i class='bx bx-x' id="close-icon"></i>
-      </div>
 
       <nav class="navbar" role="navigation">
         <a href="#home" class="active" aria-label="Home">Home</a>
@@ -38,6 +48,16 @@
         <a href="#portfolio" aria-label="Portfolio">Portfolio</a>
         <a href="#contact" aria-label="Contact">Contact</a>
       </nav>
+
+      <div class="header-controls">
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <i class='bx bx-moon'></i>
+        </button>
+        <div class="menu-icon-container" onclick="toggleMenu()">
+          <i class='bx bx-menu' id="menu-icon"></i>
+          <i class='bx bx-x' id="close-icon"></i>
+        </div>
+      </div>
     </header>
 
     <main>
@@ -165,7 +185,7 @@
           </div>
         </div>
         
-        <form action="https://formspree.io/f/xldbbnvj" method="POST" id="contact-form" class="contact-form">
+        <form action="javascript:void(0)" method="POST" id="contact-form" class="contact-form">
           <div class="input-box">
             <input type="text" name="name" placeholder="Full Name" required>
           </div>
@@ -208,4 +228,3 @@
     <script src="script.js"></script>
   </body>
 </html>
-``` 

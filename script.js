@@ -83,16 +83,47 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Form submission is now handled by Formspree
+// Form submission handling with Vercel API
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Sending...';
 
-    // Re-enable button after 3 seconds in case of network issues
+    // Get form data
+    const formData = new FormData(contactForm);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message')
+    };
+
+    try {
+      const response = await fetch('https://llabs-vercel.vercel.app/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        submitBtn.innerHTML = 'Message Sent!';
+        contactForm.reset();
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      submitBtn.innerHTML = 'Failed to send';
+    }
+
+    // Reset button after delay
     setTimeout(() => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
@@ -131,4 +162,82 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initial check in case elements are already in view
   revealOnScroll();
+});
+
+// Theme toggle functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggle = document.querySelector('.theme-toggle');
+  const themeIcon = themeToggle.querySelector('i');
+  
+  // Check for saved theme preference, otherwise use system preference
+  const getTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  // Apply theme to document
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    
+    // Update icon and logo with fade effect
+    const themeLogo = document.querySelector('.theme-logo');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Fade out
+    themeLogo.style.opacity = '0';
+    
+    // Change source after fade out
+    setTimeout(() => {
+      if (theme === 'dark') {
+        themeIcon.classList.remove('bx-sun');
+        themeIcon.classList.add('bx-moon');
+        themeLogo.src = 'assets/LLYWELLYN LABS WHITE.png';
+      } else {
+        themeIcon.classList.remove('bx-moon');
+        themeIcon.classList.add('bx-sun');
+        themeLogo.src = 'assets/LLYWELLYN LABS BLACK.png';
+      }
+      
+      // Fade in
+      themeLogo.style.opacity = '1';
+    }, 150);
+  };
+
+  // Initialize theme
+  const currentTheme = getTheme();
+  applyTheme(currentTheme);
+
+  // Handle theme toggle click
+  themeToggle.addEventListener('click', () => {
+    const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+  });
+
+  // Handle system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    const newTheme = e.matches ? 'dark' : 'light';
+    applyTheme(newTheme);
+  });
+});
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful');
+      })
+      .catch(err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  });
+}
+
+// PWA Installation prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
 });
