@@ -83,16 +83,47 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Form submission is now handled by Formspree
+// Form submission handling with Vercel API
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Sending...';
 
-    // Re-enable button after 3 seconds in case of network issues
+    // Get form data
+    const formData = new FormData(contactForm);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message')
+    };
+
+    try {
+      const response = await fetch('https://llabs-vercel.vercel.app/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        submitBtn.innerHTML = 'Message Sent!';
+        contactForm.reset();
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      submitBtn.innerHTML = 'Failed to send';
+    }
+
+    // Reset button after delay
     setTimeout(() => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
