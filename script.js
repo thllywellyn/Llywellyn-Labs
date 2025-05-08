@@ -237,7 +237,36 @@ if ('serviceWorker' in navigator) {
 
 // PWA Installation prompt
 let deferredPrompt;
+const installButton = document.getElementById('installButton');
+
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
+  
+  // Show the install button
+  installButton.style.display = 'block';
+});
+
+installButton.addEventListener('click', async () => {
+  if (!deferredPrompt) {
+    return;
+  }
+  
+  // Show the installation prompt
+  deferredPrompt.prompt();
+  
+  // Wait for the user to respond to the prompt
+  const { outcome } = await deferredPrompt.userChoice;
+  
+  // Hide the install button
+  installButton.style.display = 'none';
+  
+  // Clear the deferredPrompt
+  deferredPrompt = null;
+});
+
+// Hide the install button if the app is already installed
+window.addEventListener('appinstalled', () => {
+  installButton.style.display = 'none';
+  deferredPrompt = null;
 });
