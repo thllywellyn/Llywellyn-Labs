@@ -185,6 +185,140 @@ section{
   padding: 20rem 9% 2rem;
 }
 
+/* Terms and Conditions Page Styles */
+.terms-container {
+  max-width: 1200px;
+  margin: 12rem auto 2rem;
+  padding: 4rem 9%;
+  background: var(--bg-color);
+  border-radius: 2rem;
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.1);
+  border: 1px solid rgba(255, 69, 0, 0.1);
+}
+
+.terms-content {
+  line-height: 2.2;
+}
+
+.terms-content h1 {
+  font-size: 5.5rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+  color: var(--main-color);
+  text-align: center;
+  text-shadow: 0 0 15px var(--main-color);
+}
+
+.terms-content h2 {
+  font-size: 3.4rem;
+  margin-top: 5rem;
+  margin-bottom: 2.5rem;
+  color: var(--main-color);
+  font-weight: 600;
+  border-bottom: 2px solid rgba(255, 69, 0, 0.2);
+  padding-bottom: 1rem;
+}
+
+.terms-content p {
+  font-size: 2.2rem;
+  margin: 2rem 0;
+  color: var(--text-color);
+}
+
+.terms-content ul {
+  font-size: 2.2rem;
+  margin: 2rem 0 2rem 4rem;
+  color: var(--text-color);
+  list-style-type: none;
+}
+
+.terms-content li {
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.terms-content li::before {
+  content: "•";
+  color: var(--main-color);
+  position: absolute;
+  left: -2rem;
+}
+
+.terms-content a,
+.glow-link {
+  color: var(--main-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 8px var(--main-color);
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.terms-content a:hover,
+.glow-link:hover {
+  text-shadow: 0 0 15px var(--main-color);
+}
+
+.terms-content a::after,
+.glow-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--main-color);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.terms-content a:hover::after,
+.glow-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.terms-content .terms-intro{
+  font-size: 2.4rem;
+  line-height: 1.6;
+  margin: 3rem 0;
+  color: var(--main-color);
+}
+
+.terms-content .last-updated {
+  color: var(--main-color);
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.terms-content .highlight {
+  color: var(--main-color);
+  font-weight: 500;
+}
+
+/* Responsive styles for Terms page */
+@media (max-width: 768px) {
+  .terms-container {
+    padding: 3rem 5%;
+    margin: 10rem auto 2rem;
+  }
+
+  .terms-content h1 {
+    font-size: 4rem;
+  }
+
+  .terms-content h2 {
+    font-size: 2.8rem;
+  }
+
+  .terms-content p,
+  .terms-content ul {
+    font-size: 1.8rem;
+  }
+}
+
 .home{
   display: flex;
   justify-content: center;
@@ -398,12 +532,7 @@ span {
   margin-top: 15px;
   text-align: center;
   font-size: 1.4rem;
-  color: var(--text-color);
-}
-
-.instagram {
-  background: var(--bg-color);
-  padding: 10rem 9% 2rem;
+  color: var (--text-color);
 }
 
 .section-title {
@@ -411,12 +540,6 @@ span {
   font-size: 4rem;
   margin-bottom: 5rem;
   color: var(--text-color);
-}
-
-.instagram-feed {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
 }
 
 /* Services Section */
@@ -544,7 +667,7 @@ span {
   align-items: center;
   width: 5rem;
   height: 5rem;
-  background: var(--text-color);
+  background: var (--text-color);
   border-radius: 50%;
 }
 
