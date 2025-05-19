@@ -219,6 +219,14 @@ section{
   padding-bottom: 1rem;
 }
 
+.terms-content h3 {
+  font-size: 2.8rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  color: var(--main-color);
+  font-weight: 600;
+}
+
 .terms-content p {
   font-size: 2.2rem;
   margin: 2rem 0;
@@ -755,6 +763,44 @@ span {
   margin-top: 1rem;
   align-self: flex-start;
   padding: 1.5rem 3rem;
+}
+
+.contact-details {
+  background: var(--second-bg-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin: 2rem 0;
+  border: 1px solid rgba(255, 69, 0, 0.2);
+}
+
+.contact-details p {
+  margin: 1rem 0;
+}
+
+.contact-details strong {
+  color: var(--main-color);
+  font-size: 2.4rem;
+}
+
+.terms-list {
+  list-style-type: none;
+  padding-left: 2rem;
+}
+
+.terms-list li {
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.terms-list li::before {
+  content: "";
+  position: absolute;
+  left: -2rem;
+  top: 1rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: var(--main-color);
+  border-radius: 50%;
 }
 
 /* Scroll-to-top button */
