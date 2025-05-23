@@ -48,7 +48,7 @@ export default function OnboardingPage() {
     'Website Development',
     'Social Media Management',
     'Domain Management',
-    'Email Solutions',
+    'Email Consultation',
     'SEO Optimization',
     'Digital Marketing',
     'Brand Development'

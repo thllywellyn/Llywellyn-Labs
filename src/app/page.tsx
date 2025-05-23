@@ -90,14 +90,72 @@ export default function Home() {
             
             <div className="service-box">
               <i className="bx bx-envelope"></i>
-              <h3>Email Solutions</h3>
+              <h3>Email Consultation</h3>
               <p>Custom email setup with your domain for a professional business image and reliable communication.</p>
             </div>
           </div>
         </section>
 
-        {/* Portfolio Section */}
-        <section className="portfolio" id="portfolio">
+        {/* Pricing Section */}
+        <section className="pricing" id="pricing">
+          <h2 className="section-title">My <span>Pricing</span></h2>
+          <div className="pricing-container">
+            <div className="pricing-box">
+              <h3>Web Development</h3>
+              <p className="starting-price">Starting from ₹2,999</p>
+              <ul className="pricing-list">
+                <li>One-Page Website – ₹2,999</li>
+                <li>Basic Site – ₹4,999</li>
+                <li>Business Site – ₹9,999</li>
+                <li>Custom Web App – ₹15,000+</li>
+              </ul>
+              <a href="#contact">
+                <button className="btn">Get Started</button>
+              </a>
+            </div>
+
+            <div className="pricing-box">
+              <h3>Social Media Management</h3>
+              <p className="starting-price">Starting from ₹2,499/month</p>
+              <ul className="pricing-list">
+                <li>Starter – ₹2,499/month</li>
+                <li>Growth – ₹4,999/month</li>
+                <li>Full Strategy + Ads – ₹8,999/month</li>
+              </ul>
+              <a href="#contact">
+                <button className="btn">Get Started</button>
+              </a>
+            </div>
+
+            <div className="pricing-box">
+              <h3>Domain Consultation</h3>
+              <p className="starting-price">Starting from ₹499</p>
+              <ul className="pricing-list">
+                <li>Name Advice – ₹499</li>
+                <li>Setup Guidance – ₹699</li>
+                <li>Full Strategy – ₹1,499</li>
+              </ul>
+              <a href="#contact">
+                <button className="btn">Get Started</button>
+              </a>
+            </div>
+
+            <div className="pricing-box">
+              <h3>Email Consultation</h3>
+              <p className="starting-price">Starting from ₹999</p>
+              <ul className="pricing-list">
+                <li>Custom Setup – ₹999</li>
+                <li>Integration – ₹1,999</li>
+                <li>Support – ₹499/year</li>
+              </ul>
+              <a href="#contact">
+                <button className="btn">Get Started</button>
+              </a>
+            </div>
+          </div>
+        </section>        
+        {/* Portfolio Section - Hidden for now */}
+        {/* <section className="portfolio" id="portfolio">
           <h2 className="section-title">My <span>Portfolio</span></h2>
           <div className="portfolio-container">
             <div className="portfolio-box">
@@ -151,7 +209,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Contact Section */}
         <section className="contact" id="contact">
