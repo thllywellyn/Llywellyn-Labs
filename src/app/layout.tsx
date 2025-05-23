@@ -2,7 +2,7 @@ import './globals.css'
 import { SessionProvider } from '../components/SessionProvider'
 import { getServerSession } from 'next-auth'
 import { Inter, Poppins } from 'next/font/google'
-import { authOptions } from './api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth'
 
 const inter = Inter({ subsets: ['latin'] })
 const poppins = Poppins({

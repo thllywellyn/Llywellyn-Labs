@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { sendVerificationEmail } from "@/lib/email";
 import { generateOTP } from "@/lib/utils";
 

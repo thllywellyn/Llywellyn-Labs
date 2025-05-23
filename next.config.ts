@@ -3,7 +3,6 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  manifest: '/assets/site.webmanifest',
 });
 
 const nextConfig: NextConfig = {
