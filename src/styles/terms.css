@@ -1,0 +1,142 @@
+/* Terms and Conditions Page Styles */
+.terms-container {
+    max-width: 80rem;
+    margin: 12rem auto 4rem;
+    padding: 0 2rem;
+    min-height: 100vh;
+    background: var(--bg-color);
+}
+
+.terms-content {
+    background: var(--second-bg-color);
+    border-radius: 1.6rem;
+    padding: 4rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    margin: 0 auto;
+}
+
+.terms-content h1 {
+    font-size: 3.6rem;
+    font-weight: 700;
+    margin-bottom: 2.4rem;
+    color: var(--text-color);
+}
+
+.terms-content h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin: 3.2rem 0 1.6rem;
+    color: var(--text-color);
+}
+
+.terms-content h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    color: var(--text-color);
+}
+
+.terms-content p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-bottom: 1.6rem;
+    color: var(--text-color);
+}
+
+.terms-content ul {
+    margin: 1.6rem 0;
+    padding-left: 2.4rem;
+}
+
+.terms-content li {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+}
+
+.last-updated {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+}
+
+.terms-intro {
+    font-size: 1.7rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.contact-details {
+    background: var(--second-bg-color);
+    border-radius: 1rem;
+    margin: 2rem 0;
+    padding: 2rem;
+}
+
+.contact-details p {
+    margin: 0.7rem 0;
+}
+
+.terms-list {
+    margin: 1.5rem 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.terms-list li {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    font-size: 1.6rem;
+    line-height: 1.7;
+    position: relative;
+}
+
+.terms-list li:before {
+    content: "•";
+    color: var(--main-color);
+    position: absolute;
+    left: 0;
+}
+
+.sublist {
+    padding-left: 1em;
+    margin-top: 0.5em;
+}
+
+.glow-link {
+    color: var(--main-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.glow-link:hover {
+    color: var(--text-color);
+    text-shadow: 0 0 8px var(--main-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .terms-container {
+        margin: 5rem auto 1rem;
+        padding: 1rem;
+    }
+
+    .terms-content {
+        padding: 1.5rem;
+    }
+
+    .terms-content h1 {
+        font-size: 2rem;
+    }
+
+    .terms-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .terms-content h3 {
+        font-size: 1.3rem;
+    }
+}

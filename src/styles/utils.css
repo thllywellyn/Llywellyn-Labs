@@ -1,36 +1,36 @@
-/* Import base styles first */
-@import '../styles/base.css';
-@import '../styles/utils.css';
+/* Preloader */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-/* Import layout components */
-@import '../styles/navbar.css';
-@import '../styles/home.css';
-@import '../styles/dashboard.css';
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--main-color);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
 
-/* Import section styles */
-@import '../styles/services.css';
-@import '../styles/portfolio.css';
-@import '../styles/pricing.css';
-@import '../styles/contact.css';
-@import '../styles/footer.css';
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
 
-/* Import auth pages */
-@import '../styles/auth.css';
-@import '../styles/terms.css';
-
-/* Import reusable components */
-@import '../styles/components.css';
-@import '../styles/social.css';
-
-/* Header styles moved to navbar.css */
-
-/* Sections */
+/* Section Base Styles */
 section {
   min-height: 100vh;
   padding: 12rem 9% 2rem;
 }
 
-/* Section styles */
 .section-title {
   text-align: center;
   font-size: 4rem;
@@ -42,20 +42,39 @@ section {
   color: var(--main-color);
 }
 
-/* Home section styles moved to home.css */
+/* Scroll Top Button */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+  background: var(--main-color);
+  border-radius: 50%;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s ease;
+  z-index: 99;
+}
 
-/* Social icons styles moved to social.css */
+.scroll-top-btn.active {
+  opacity: 1;
+  pointer-events: auto;
+  bottom: 2rem;
+}
 
-/* Button styles moved to components.css */
+.scroll-top-btn:hover {
+  background: var(--text-color);
+  color: var(--main-color);
+  box-shadow: 0 0 1rem var(--main-color);
+}
 
-/* Section title is already defined above */
-
-/* Services section styles moved to services.css */
-
-/* Portfolio section styles moved to portfolio.css */
-
-/* Contact section styles moved to contact.css */
-
+/* Common Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -67,15 +86,13 @@ section {
   }
 }
 
-/* Footer styles moved to footer.css */
+@keyframes buttonLoader {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-/* Scroll top button styles moved to components.css */
-
-/* Dashboard layout styles moved to dashboard.css */
-
-/* Home Section Updates */
-
-/* Responsive Design */
+/* Media Queries */
 @media (max-width: 1200px) {
   html {
     font-size: 55%;
@@ -230,62 +247,4 @@ section {
   .starting-price {
     font-size: 1.8rem;
   }
-}
-
-
-
-/* Terms and Conditions styles moved to terms.css */
-
-/* Terms and Conditions styles moved to terms.css */
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .steps-indicator {
-    flex-direction: column;
-    gap: 1.6rem;
-  }
-
-  .steps-indicator::before {
-    display: none;
-  }
-
-  .step {
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
-  }
-
-  .step-number {
-    margin-bottom: 0;
-  }
-
-  .form-actions {
-    flex-direction: column-reverse;
-  }
-
-  .secondary-button,
-  .primary-button {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* Dashboard View All Link */
-.dashboard-view-all {
-  display: block;
-  text-align: center;
-  padding: 1rem 2rem;
-  margin-top: 2rem;
-  font-size: 1.4rem;
-  color: var(--main-color);
-  background-color: rgba(var(--main-color-rgb), 0.1);
-  border-radius: 0.8rem;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-}
-
-.dashboard-view-all:hover {
-  background-color: var(--main-color);
-  color: var(--bg-color);
-  transform: translateY(-2px);
 }
