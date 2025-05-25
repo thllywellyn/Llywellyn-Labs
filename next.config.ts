@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
+
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
+  buildExcludes: [/middleware-manifest\.json$/],
   runtimeCaching: [
     {
       urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
@@ -12,7 +14,7 @@ const withPWA = require('next-pwa')({
         cacheName: 'google-fonts',
         expiration: {
           maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60 // 365 days
+          maxAgeSeconds: 365 * 24 * 60 * 60
         }
       }
     },
@@ -31,6 +33,13 @@ const withPWA = require('next-pwa')({
       }
     },
     {
+      urlPattern: /\/_next\/image\?url=.+$/i,
+      handler: 'StaleWhileRevalidate',
+      options: {
+        cacheName: 'next-image'
+      }
+    },
+    {
       urlPattern: /\.(?:js)$/i,
       handler: 'StaleWhileRevalidate',
       options: {
@@ -42,6 +51,28 @@ const withPWA = require('next-pwa')({
       handler: 'StaleWhileRevalidate',
       options: {
         cacheName: 'static-style-assets'
+      }
+    },
+    {
+      urlPattern: /_next\/data\/.+\/.+\.json$/i,
+      handler: 'StaleWhileRevalidate',
+      options: {
+        cacheName: 'next-data'
+      }
+    },
+    {
+      urlPattern: /\.(?:json|xml|csv)$/i,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'static-data-assets'
+      }
+    },
+    {
+      urlPattern: /.*/i,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'others',
+        networkTimeoutSeconds: 10
       }
     }
   ]
@@ -63,7 +94,14 @@ const nextConfig: NextConfig = {
   },
   reactStrictMode: true,
   images: {
-    domains: ['*.lsanalab.xyz', 'localhost'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+        port: '',
+        pathname: '**',
+      }
+    ],
   },
 };
 
