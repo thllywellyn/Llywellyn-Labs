@@ -1,10 +1,9 @@
-import type { NextConfig } from "next";
-
+import type { NextConfig } from 'next';
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
+  disable: process.env.NODE_ENV === 'development', // Important
   buildExcludes: [/middleware-manifest\.json$/],
   runtimeCaching: [
     {
@@ -12,73 +11,61 @@ const withPWA = require('next-pwa')({
       handler: 'CacheFirst',
       options: {
         cacheName: 'google-fonts',
-        expiration: {
-          maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60
-        }
-      }
+        expiration: { maxEntries: 4, maxAgeSeconds: 365 * 24 * 60 * 60 },
+      },
     },
     {
       urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
       handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'static-font-assets'
-      }
+      options: { cacheName: 'static-font-assets' },
     },
     {
       urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
       handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'static-image-assets'
-      }
+      options: { cacheName: 'static-image-assets' },
     },
     {
       urlPattern: /\/_next\/image\?url=.+$/i,
       handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'next-image'
-      }
+      options: { cacheName: 'next-image' },
     },
     {
       urlPattern: /\.(?:js)$/i,
       handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'static-js-assets'
-      }
+      options: { cacheName: 'static-js-assets' },
     },
     {
       urlPattern: /\.(?:css|less)$/i,
       handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'static-style-assets'
-      }
+      options: { cacheName: 'static-style-assets' },
     },
     {
       urlPattern: /_next\/data\/.+\/.+\.json$/i,
       handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'next-data'
-      }
+      options: { cacheName: 'next-data' },
     },
     {
       urlPattern: /\.(?:json|xml|csv)$/i,
       handler: 'NetworkFirst',
-      options: {
-        cacheName: 'static-data-assets'
-      }
+      options: { cacheName: 'static-data-assets' },
     },
     {
       urlPattern: /.*/i,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'others',
-        networkTimeoutSeconds: 10
-      }
-    }
-  ]
+        networkTimeoutSeconds: 10,
+      },
+    },
+  ],
 });
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  env: {
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+  },
   async redirects() {
     return [
       {
@@ -88,11 +75,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  env: {
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
-    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
-  },
-  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
@@ -100,7 +82,7 @@ const nextConfig: NextConfig = {
         hostname: '**',
         port: '',
         pathname: '**',
-      }
+      },
     ],
   },
 };
