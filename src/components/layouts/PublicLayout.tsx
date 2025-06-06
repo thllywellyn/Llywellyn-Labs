@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import AuthModal from '../AuthModal'
 import { useSession, signOut } from 'next-auth/react'
 
@@ -16,6 +17,8 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isDashboard = pathname?.startsWith('/dashboard')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -158,48 +161,50 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
 
       <main>{children}</main>
 
-      <footer className="footer">
-        <div className="social">
-          <a
-            href="https://www.instagram.com/thllywellyn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <i className="bx bxl-instagram-alt"></i>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/thllywellyn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <i className="bx bxl-linkedin-square"></i>
-          </a>
-          <a
-            href="https://x.com/thllywellyn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter"
-          >
-            <i className="bx bxl-twitter"></i>
-          </a>
-          <a
-            href="https://github.com/thllywellyn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-          >
-            <i className="bx bxl-github"></i>
-          </a>
-        </div>
-        <div className="footer-text">
-          <Link href="/terms" className="hover:text-gray-300 mr-4">
-            Terms & Conditions
-          </Link>
-          <p>© {new Date().getFullYear()} Llywellyn Labs | All rights reserved</p>
-        </div>
-      </footer>
+      {!isDashboard && (
+        <footer className="footer">
+          <div className="social">
+            <a
+              href="https://www.instagram.com/thllywellyn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <i className="bx bxl-instagram-alt"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/thllywellyn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <i className="bx bxl-linkedin-square"></i>
+            </a>
+            <a
+              href="https://x.com/thllywellyn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+            >
+              <i className="bx bxl-twitter"></i>
+            </a>
+            <a
+              href="https://github.com/thllywellyn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <i className="bx bxl-github"></i>
+            </a>
+          </div>
+          <div className="footer-text">
+            <Link href="/terms" className="hover:text-gray-300 mr-4">
+              Terms & Conditions
+            </Link>
+            <p>© {new Date().getFullYear()} Llywellyn Labs | All rights reserved</p>
+          </div>
+        </footer>
+      )}
     </div>
   )
 }

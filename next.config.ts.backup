@@ -1,9 +1,12 @@
 import type { NextConfig } from 'next';
-
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
-  disable: false,
+  skipWaiting: true,
+  disable: false, // Enable in all environments for testing
+  reloadOnOnline: true,
+  sw: 'sw.js',
+  buildExcludes: [/middleware-manifest\.json$/],
   runtimeCaching: [
     {
       urlPattern: /_next\/static\/.*/i,
@@ -19,24 +22,23 @@ const withPWA = require('next-pwa')({
         cacheName: 'api-response',
       },
     },
-    {
-      urlPattern: /\/_next\/app-build-manifest\.json$/i,
-      handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'manifest',
-      },
-    },
+  ],
+  skipWaiting: true,
+  fallbacks: {
+    document: '/offline'
+  },
+  runtimeCaching: [
     {
       urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
       handler: 'CacheFirst',
       options: {
         cacheName: 'google-fonts',
-        expiration: {
-          maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60
+        expiration: { 
+          maxEntries: 4, 
+          maxAgeSeconds: 365 * 24 * 60 * 60 // 1 year
         },
-        cacheableResponse: {
-          statuses: [0, 200]
+        cacheableResponse: { 
+          statuses: [0, 200] 
         }
       },
     },
@@ -64,6 +66,16 @@ const withPWA = require('next-pwa')({
       urlPattern: /\.(?:css|less)$/i,
       handler: 'StaleWhileRevalidate',
       options: { cacheName: 'static-style-assets' },
+    },
+    {
+      urlPattern: /_next\/data\/.+\/.+\.json$/i,
+      handler: 'StaleWhileRevalidate',
+      options: { cacheName: 'next-data' },
+    },
+    {
+      urlPattern: /\.(?:json|xml|csv)$/i,
+      handler: 'NetworkFirst',
+      options: { cacheName: 'static-data-assets' },
     },
     {
       urlPattern: /.*/i,

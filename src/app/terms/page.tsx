@@ -10,13 +10,13 @@ export default function TermsAndConditions() {
           <p className="last-updated">Effective Date: 19-05-2025 | Version: 1.2</p>
 
           <p className="terms-intro">
-            This document explains how Llywellyn Labs and its affiliates collect, use, share, and protect your personal data on https://lsanalab.xyz/. 
+            This document explains how Llywellyn Labs and its associates collect, use, share, and protect your personal data on https://lsanalab.xyz/. 
             By using our Platform, you agree to the terms below.
           </p>
 
           <h2>Privacy Policy</h2>
           <p>
-            This Privacy Policy describes how Llywellyn Labs and its affiliates (collectively "Llywellyn Labs", we, our, us) collect, use, share, 
+            This Privacy Policy describes how Llywellyn Labs and its associates (collectively "Llywellyn Labs", we, our, us) collect, use, share, 
             protect or otherwise process your information/personal data through our website https://lsanalab.xyz/ (referred to as "Platform"). 
             Please note that you may be able to browse certain sections of the Platform without registering with us. We do not offer any product/service 
             under this Platform outside India and your personal data will primarily be stored and processed in India.
@@ -44,7 +44,7 @@ export default function TermsAndConditions() {
 
           <h2>Sharing</h2>
           <p>
-            Data may be shared with internal affiliates, partners, service providers, government agencies (when legally required), and for legal enforcement. 
+            Data may be shared with internal associates, partners, service providers, government agencies (when legally required), and for legal enforcement. 
             Third-party partners' privacy policies apply when they collect data directly.
           </p>
 
