@@ -5,9 +5,11 @@ import { authOptions } from '@/lib/auth'
 import { v2 as cloudinary } from 'cloudinary'
 
 // Cloudinary error type
-interface CloudinaryError extends Error {
+interface CloudinaryError {
   http_code?: number;
   message: string;
+  name?: string;
+  [key: string]: any; // For any other properties that Cloudinary might return
 }
 
 cloudinary.config({
@@ -161,9 +163,10 @@ export async function POST(request: Request) {
     // Handle specific error types
     if (error && typeof error === 'object' && 'http_code' in error) {
       // This is likely a Cloudinary error
+      const cloudinaryError = error as CloudinaryError;
       return new NextResponse(JSON.stringify({ 
         error: 'File upload failed. Please try again.',
-        details: (error as Error).message
+        details: cloudinaryError.message || 'Unknown Cloudinary error'
       }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
@@ -171,9 +174,18 @@ export async function POST(request: Request) {
     }
 
     // Generic error response
+    let errorMessage = 'Unknown error';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (typeof error === 'object' && error !== null && 'message' in error) {
+      errorMessage = String(error.message);
+    } else if (typeof error === 'string') {
+      errorMessage = error;
+    }
+
     return new NextResponse(JSON.stringify({ 
       error: 'An unexpected error occurred',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      details: errorMessage
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
