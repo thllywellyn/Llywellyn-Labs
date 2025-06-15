@@ -104,7 +104,7 @@ export default function FilesPage() {
         progress: 0,
         customName: file.name
       }))
-      setUploadingFiles(newFiles)
+      setUploadingFiles(prev => [...prev, ...newFiles])
       setValidationError('') // Clear any previous validation errors
     }
   }
@@ -116,7 +116,7 @@ export default function FilesPage() {
         progress: 0,
         customName: file.name
       }))
-      setUploadingFiles(newFiles)
+      setUploadingFiles(prev => [...prev, ...newFiles])
       setValidationError('') // Clear any previous validation errors
     }
   }
@@ -311,7 +311,7 @@ export default function FilesPage() {
             className="hidden"
             multiple
             onChange={handleFileSelect}
-            accept="*/*" // Accept all file types
+            accept="*/*"
           />
           
           {uploadingFiles.length === 0 ? (
@@ -330,7 +330,13 @@ export default function FilesPage() {
               <p>or drag and drop files here</p>
             </div>
           ) : (
-            <>
+            <div
+              className={`upload-area ${dragActive ? 'drag-active' : ''}`}
+              onDragEnter={handleDrag}
+              onDragLeave={handleDrag}
+              onDragOver={handleDrag}
+              onDrop={handleDrop}
+            >
               <div className="upload-list">
                 {uploadingFiles.map((file, index) => (
                   <div key={index} className="upload-item">
@@ -368,14 +374,20 @@ export default function FilesPage() {
                 ))}
               </div>
 
-              <button
-                className="add-more-files"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                <i className="bx bx-plus"></i>
-                Add More Files
-              </button>
-            </>
+              <div className="upload-actions">
+                <button
+                  className="add-more-files"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <i className="bx bx-plus"></i>
+                  Add More Files
+                </button>
+                <div className="drag-drop-hint">
+                  <i className="bx bx-cloud-upload"></i>
+                  <p>or drag and drop files here</p>
+                </div>
+              </div>
+            </div>
           )}
 
           <div className="project-select">

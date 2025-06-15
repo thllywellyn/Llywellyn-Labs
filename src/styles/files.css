@@ -380,3 +380,127 @@ select.required {
 select.required:hover {
   border-color: var(--error-color);
 }
+
+.add-more-files {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.6rem;
+  margin-top: 2rem;
+  background: var(--bg-color);
+  border: 2px dashed var(--border-color);
+  border-radius: 1.2rem;
+  color: var(--text-color);
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 1rem;
+}
+
+.add-more-files i {
+  font-size: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.add-more-files:hover {
+  border-color: var(--main-color);
+  background: rgba(var(--main-color-rgb), 0.05);
+  color: var(--main-color);
+  transform: translateY(-2px);
+}
+
+.add-more-files:hover i {
+  transform: rotate(90deg);
+}
+
+/* Container for the button to ensure proper centering */
+.upload-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.upload-area {
+  padding: 2rem;
+  border: 2px dashed var(--border-color);
+  border-radius: 1.2rem;
+  transition: all 0.2s ease;
+  background: var(--bg-color);
+  position: relative;
+}
+
+.upload-area.drag-active {
+  border-color: var(--main-color);
+  background: rgba(var(--main-color-rgb), 0.05);
+  transform: scale(1.01);
+}
+
+.upload-list {
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.upload-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 1.6rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 1rem;
+}
+
+.drag-drop-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.drag-drop-hint i {
+  font-size: 2.4rem;
+  opacity: 0.7;
+}
+
+.drag-drop-hint p {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.add-more-files {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 2.4rem;
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 1rem;
+  color: var(--text-color);
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 1rem;
+  min-width: 200px;
+}
+
+.add-more-files:hover {
+  border-color: var(--main-color);
+  background: rgba(var(--main-color-rgb), 0.05);
+  color: var(--main-color);
+  transform: translateY(-2px);
+}
+
+.add-more-files i {
+  font-size: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.add-more-files:hover i {
+  transform: rotate(90deg);
+}
