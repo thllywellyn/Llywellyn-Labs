@@ -14,12 +14,26 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
 
   useEffect(() => {
     setMounted(true)
+    return () => setMounted(false)
   }, [])
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
 
   if (!mounted || !isOpen) return null
 
   return createPortal(
     <div
+      className="modal-overlay"
+      onClick={onClose}
       style={{
         position: 'fixed',
         top: 0,
@@ -32,11 +46,10 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         alignItems: 'center',
         zIndex: 99999,
       }}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose()
-      }}
     >
       <div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
         style={{
           padding: '20px',
           borderRadius: '8px',
@@ -47,7 +60,6 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
           position: 'relative',
           zIndex: 100000,
         }}
-        onClick={(e) => e.stopPropagation()}
       >
         {children}
       </div>
