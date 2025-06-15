@@ -1,16 +1,28 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
   const router = useRouter()
+  const { data: session } = useSession()
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    // Check if user is already logged in and redirect accordingly
+    if (session?.user) {
+      if (session.user.role === 'ADMIN') {
+        router.push('/admin')
+      } else {
+        router.push('/dashboard')
+      }
+    }
+  }, [session, router])
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -40,7 +52,7 @@ export default function LoginPage() {
         return
       }
 
-      router.push('/dashboard')
+      // The session will update and useEffect will handle redirection
     } catch (error) {
       setError('Something went wrong')
     } finally {

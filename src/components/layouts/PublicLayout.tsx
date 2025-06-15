@@ -9,9 +9,10 @@ import { useSession, signOut } from 'next-auth/react'
 
 interface PublicLayoutProps {
   children: ReactNode
+  hideFooter?: boolean
 }
 
-export default function PublicLayout({ children }: PublicLayoutProps) {
+export default function PublicLayout({ children, hideFooter = false }: PublicLayoutProps) {
   const { data: session } = useSession()
   const [theme, setTheme] = useState('dark')
   const [isScrolled, setIsScrolled] = useState(false)
@@ -33,6 +34,13 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
     setTheme(savedTheme)
     document.documentElement.setAttribute('data-theme', savedTheme)
   }, [])
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('auth') === 'login') {
+      setIsAuthModalOpen(true);
+    }
+  }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
@@ -87,6 +95,11 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
               <Link href="/dashboard" className="hover:text-orange-500 transition-colors">
                 Dashboard
               </Link>
+              {session.user.role === 'ADMIN' && (
+                <Link href="/admin" className="hover:text-orange-500 transition-colors">
+                  Admin Panel
+                </Link>
+              )}
               <button
                 onClick={() =>
                   signOut({
@@ -161,7 +174,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
 
       <main>{children}</main>
 
-      {!isDashboard && (
+      {!hideFooter && !isDashboard && (
         <footer className="footer">
           <div className="social">
             <a

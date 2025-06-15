@@ -1,0 +1,273 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--bg-color);
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 60rem;
+  max-height: 90vh;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  padding: 2rem;
+  border-bottom: 0.1rem solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.modal-body {
+  padding: 2rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 2rem;
+  border-top: 0.1rem solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  border: 0.2rem dashed var(--border-color);
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 2.4rem;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  background: transparent;
+  border: 0.2rem solid var(--main-color);
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-button:hover {
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+
+.upload-button i {
+  font-size: 2rem;
+}
+
+.upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.upload-item {
+  background: var(--bg-color);
+  border: 0.1rem solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+}
+
+.upload-item-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.filename {
+  font-weight: 500;
+}
+
+.filesize {
+  color: var(--text-secondary);
+}
+
+.upload-progress {
+  height: 0.4rem;
+  background: var(--border-color);
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--main-color);
+  transition: width 0.3s ease;
+}
+
+.upload-error {
+  color: var(--error-color);
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+}
+
+.project-select {
+  margin-top: 2rem;
+}
+
+.project-select label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.project-select select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border: 0.1rem solid var(--border-color);
+  border-radius: 0.8rem;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.primary-button {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--bg-color);
+  background: var(--main-color);
+  border: none;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-button:hover {
+  opacity: 0.9;
+}
+
+.primary-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--text-color);
+  background: transparent;
+  border: 0.1rem solid var(--border-color);
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondary-button:hover {
+  background: var(--border-color);
+}
+
+.hidden {
+  display: none;
+}
+
+/* File grid styles */
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.file-card {
+  background: var(--bg-color);
+  border: 0.1rem solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-card:hover {
+  transform: translateY(-0.2rem);
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+}
+
+.file-card.selected {
+  border-color: var(--main-color);
+  background: rgba(var(--main-color-rgb), 0.05);
+}
+
+.file-icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.file-icon i {
+  font-size: 2.4rem;
+  color: var(--main-color);
+}
+
+.file-info h3 {
+  margin: 0 0 0.8rem 0;
+  font-size: 1.6rem;
+}
+
+.project-link {
+  color: var(--main-color);
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
+.file-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.2rem;
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+}
+
+.file-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0.4rem;
+  transition: color 0.2s ease;
+}
+
+.action-button:hover {
+  color: var(--main-color);
+}

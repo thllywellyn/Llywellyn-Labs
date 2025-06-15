@@ -14,19 +14,12 @@ interface Project {
     name: string
     url: string
   }>
-  messages: Array<{
-    id: string
-    content: string
-    createdAt: string
-    user: {
-      name: string
-    }
-  }>
 }
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -82,20 +75,18 @@ export default function ProjectsPage() {
                 <i className='bx bx-file'></i>
                 <span>{project.files.length} Files</span>
               </div>
-              <div className="stat">
-                <i className='bx bx-message'></i>
-                <span>{project.messages.length} Messages</span>
-              </div>
             </div>
 
             <div className="project-meta">
               <span className="date">
                 Created {new Date(project.createdAt).toLocaleDateString()}
               </span>
-              <button className="view-details">
-                View Details
-                <i className='bx bx-right-arrow-alt'></i>
-              </button>
+              <div className="flex gap-2">
+                <button className="view-details">
+                  View Details
+                  <i className='bx bx-right-arrow-alt'></i>
+                </button>
+              </div>
             </div>
           </div>
         ))}

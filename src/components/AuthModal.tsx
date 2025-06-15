@@ -61,7 +61,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           redirect: false,
           email: formData.email,
           password: formData.password,
-          callbackUrl: '/',
           remember: rememberMe,
         })
 

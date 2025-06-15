@@ -12,18 +12,6 @@ interface Project {
   createdAt: string
 }
 
-interface Message {
-  id: string
-  content: string
-  createdAt: string
-  user: {
-    name: string
-  }
-  project: {
-    title: string
-  }
-}
-
 interface File {
   id: string
   name: string
@@ -37,7 +25,6 @@ interface File {
 export default function DashboardPage() {
   const { data: session } = useSession()
   const [projects, setProjects] = useState<Project[]>([])
-  const [messages, setMessages] = useState<Message[]>([])
   const [files, setFiles] = useState<File[]>([])
   const [stats, setStats] = useState({
     totalProjects: 0,
@@ -49,20 +36,17 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const [projectsRes, messagesRes, filesRes] = await Promise.all([
+        const [projectsRes, filesRes] = await Promise.all([
           fetch('/api/projects'),
-          fetch('/api/messages?limit=5'),
           fetch('/api/files?limit=5')
         ])
 
-        const [projectsData, messagesData, filesData] = await Promise.all([
+        const [projectsData, filesData] = await Promise.all([
           projectsRes.json(),
-          messagesRes.json(),
           filesRes.json()
         ])
 
         setProjects(projectsData)
-        setMessages(messagesData)
         setFiles(filesData)
         
         // Calculate stats
@@ -108,24 +92,6 @@ export default function DashboardPage() {
                   ))}
                   <Link href="/dashboard/projects" className="dashboard-view-all">
                     View All Projects →
-                  </Link>
-                </div>
-              </div>
-
-              <div className="dashboard-section">
-                <h2 className="dashboard-section-title">Recent Messages</h2>
-                <div className="dashboard-list">
-                  {messages.map((message) => (
-                    <div key={message.id} className="dashboard-list-item">
-                      <h4>{message.project.title}</h4>
-                      <p>{message.content}</p>
-                      <span className="text-[1.2rem] opacity-70">
-                        From: {message.user.name}
-                      </span>
-                    </div>
-                  ))}
-                  <Link href="/dashboard/messages" className="dashboard-view-all">
-                    View All Messages →
                   </Link>
                 </div>
               </div>

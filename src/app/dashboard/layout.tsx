@@ -46,10 +46,6 @@ export default function DashboardLayout({
               <i className='bx bxs-briefcase'></i>
               Projects
             </Link>
-            <Link href="/dashboard/messages" className="dashboard-nav-item" onClick={() => setIsSidebarOpen(false)}>
-              <i className='bx bxs-message-dots'></i>
-              Messages
-            </Link>
             <Link href="/dashboard/files" className="dashboard-nav-item" onClick={() => setIsSidebarOpen(false)}>
               <i className='bx bxs-file'></i>
               Files

@@ -80,59 +80,51 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+      <div className="onboarding-container">
+        <div className="onboarding-header">
+          <h2 className="onboarding-title">
             Complete Your Profile
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="onboarding-subtitle">
             Help us understand your business better to provide tailored solutions
           </p>
         </div>
 
         {/* Progress Steps */}
-        <div className="mb-8">
-          <div className="flex justify-center">
-            {[1, 2, 3].map((s) => (
-              <div
-                key={s}
-                className={`w-3 h-3 rounded-full mx-2 ${
-                  s <= step ? 'bg-orange-600' : 'bg-gray-300'
-                }`}
-              />
-            ))}
-          </div>
-          <p className="text-center mt-2 text-sm text-gray-500">
-            Step {step} of 3
-          </p>
+        <div className="onboarding-progress">
+          {[1, 2, 3].map((s) => (
+            <div
+              key={s}
+              className={`progress-step ${s <= step ? 'active' : 'inactive'}`}
+            />
+          ))}
         </div>
 
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="onboarding-form">
+          <form onSubmit={handleSubmit}>
             {step === 1 && (
-              <div className="space-y-6">
-                <div>
-                  <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">
+              <div className="form-group">
+                <div className="form-group">
+                  <label htmlFor="businessName" className="form-label">
                     Business Name
                   </label>
                   <input
                     type="text"
                     id="businessName"
                     required
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                    className="form-input"
                     value={formData.businessName}
                     onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
                   />
                 </div>
-                <div>
-                  <label htmlFor="industry" className="block text-sm font-medium text-gray-700">
+                <div className="form-group">
+                  <label htmlFor="industry" className="form-label">
                     Industry
                   </label>
                   <select
                     id="industry"
                     required
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                    className="form-select"
                     value={formData.industry}
                     onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
                   >
@@ -148,27 +140,27 @@ export default function OnboardingPage() {
             )}
 
             {step === 2 && (
-              <div className="space-y-6">
-                <div>
-                  <label htmlFor="website" className="block text-sm font-medium text-gray-700">
+              <div className="form-group">
+                <div className="form-group">
+                  <label htmlFor="website" className="form-label">
                     Website (if any)
                   </label>
                   <input
                     type="url"
                     id="website"
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                    className="form-input"
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                   />
                 </div>
-                <div>
-                  <label htmlFor="businessSize" className="block text-sm font-medium text-gray-700">
+                <div className="form-group">
+                  <label htmlFor="businessSize" className="form-label">
                     Business Size
                   </label>
                   <select
                     id="businessSize"
                     required
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                    className="form-select"
                     value={formData.businessSize}
                     onChange={(e) => setFormData({ ...formData, businessSize: e.target.value })}
                   >
@@ -184,17 +176,20 @@ export default function OnboardingPage() {
             )}
 
             {step === 3 && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-4">
+              <div className="form-group">
+                <label className="form-label">
                   What services are you interested in?
                 </label>
-                <div className="space-y-4">
+                <div className="checkbox-group">
                   {goals.map((goal) => (
-                    <div key={goal} className="flex items-center">
+                    <div key={goal} className="checkbox-item">
+                      <label htmlFor={goal} className="checkbox-label">
+                        {goal}
+                      </label>
                       <input
                         type="checkbox"
                         id={goal}
-                        className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                        className="checkbox-input"
                         checked={formData.goals.includes(goal)}
                         onChange={(e) => {
                           if (e.target.checked) {
@@ -210,21 +205,18 @@ export default function OnboardingPage() {
                           }
                         }}
                       />
-                      <label htmlFor={goal} className="ml-3 text-sm text-gray-700">
-                        {goal}
-                      </label>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            <div className="flex justify-between mt-8">
+            <div className="form-buttons">
               {step > 1 && (
                 <button
                   type="button"
                   onClick={() => setStep(step - 1)}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                  className="btn-previous"
                 >
                   Previous
                 </button>
@@ -233,7 +225,7 @@ export default function OnboardingPage() {
                 <button
                   type="button"
                   onClick={() => setStep(step + 1)}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                  className="btn-next"
                 >
                   Next
                 </button>
@@ -242,7 +234,7 @@ export default function OnboardingPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                  className="btn-submit"
                 >
                   {loading ? 'Saving...' : 'Complete Setup'}
                 </button>
@@ -251,6 +243,5 @@ export default function OnboardingPage() {
           </form>
         </div>
       </div>
-    </div>
   )
 }

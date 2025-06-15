@@ -6,8 +6,24 @@ import { prisma } from "./prisma";
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: '/',
-    error: '/'
+    signIn: '/login',
+    error: '/login'
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.role = token.role as string;
+        session.user.id = token.id as string;
+      }
+      return session;
+    }
   },
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -46,11 +62,16 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
+          role: user.role,
         };
       }
     })
   ],
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   }
 };

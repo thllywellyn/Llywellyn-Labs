@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     await prisma.project.create({
       data: {
         title: 'Welcome Project',
-        description: `Initial project for ${data.businessName}. Here you'll find project updates, files, and messages related to your services.`,
+        description: `Initial project for ${data.businessName}. Here you'll find project updates and files related to your services.`,
         userId: session.user.id,
         status: 'PENDING',
       },
