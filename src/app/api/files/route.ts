@@ -4,8 +4,14 @@ import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth'
 import { v2 as cloudinary } from 'cloudinary'
 
+// Cloudinary error type
+interface CloudinaryError extends Error {
+  http_code?: number;
+  message: string;
+}
+
 cloudinary.config({
-  cloud_name: 'default', // you can customize this
+  cloud_name: 'durqsthnq',
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 })
@@ -79,131 +85,96 @@ export async function POST(request: Request) {
       })
     }
 
+    // Project ID is required
     const formData = await request.formData()
-    const files = formData.getAll('file') as File[]
-    const projectId = formData.get('projectId') as string
+    const projectId = formData.get('projectId')
 
-    if (files.length === 0 || !projectId) {
-      return new NextResponse(JSON.stringify({ error: 'At least one file and projectId are required' }), {
+    if (!projectId) {
+      return new NextResponse(JSON.stringify({ error: 'Project ID is required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       })
     }
 
-    // Validate each file
-    for (const file of files) {
-      // Check file size
-      if (file.size > MAX_FILE_SIZE) {
-        return new NextResponse(JSON.stringify({ 
-          error: `File ${file.name} exceeds maximum size of ${MAX_FILE_SIZE / 1024 / 1024}MB` 
-        }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        })
-      }
-
-      // Check file type
-      if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-        return new NextResponse(JSON.stringify({ 
-          error: `File type ${file.type} is not allowed. Allowed types: ${ALLOWED_FILE_TYPES.join(', ')}` 
-        }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        })
-      }
-    }
-
-    // Check if user has access to the project
-    const project = await prisma.project.findFirst({
-      where: {
-        id: projectId,
-        OR: [
-          { userId: session.user.id },
-          { user: { role: 'ADMIN' } }
-        ]
-      }
-    })
-
-    if (!project) {
-      return new NextResponse(JSON.stringify({ error: 'Project not found or access denied' }), {
-        status: 404,
+    // Get the file from form data
+    const file = formData.get('file')
+    if (!file || !(file instanceof File)) {
+      return new NextResponse(JSON.stringify({ error: 'No file provided' }), {
+        status: 400,
         headers: { 'Content-Type': 'application/json' },
       })
     }
 
-    // Process files in parallel
-    const filePromises = files.map(async (file) => {
-      try {
-        // Convert file to base64
-        const bytes = await file.arrayBuffer()
-        const buffer = Buffer.from(bytes)
-        const base64File = `data:${file.type};base64,${buffer.toString('base64')}`
+    // Convert file to buffer for Cloudinary upload
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
 
-        // Upload to Cloudinary
-        const uploadResult = await new Promise((resolve, reject) => {
-          cloudinary.uploader.upload(base64File, {
-            resource_type: 'auto',
-            folder: `projects/${projectId}`,
-            allowed_formats: ALLOWED_FILE_TYPES.map(type => type.split('/')[1]),
-            tags: ['project_file'],
-          }, (error, result) => {
-            if (error) reject(error)
-            else resolve(result)
-          })
-        }) as { secure_url: string, public_id: string }
+    // Get custom name or use original filename
+    const customName = formData.get('customName') as string || file.name
 
-        // Save file info to database
-        return await prisma.file.create({
-          data: {
-            name: file.name,
-            url: uploadResult.secure_url,
-            projectId,
-            metadata: {
-              size: file.size,
-              type: file.type,
-              publicId: uploadResult.public_id
-            }
-          },
-          include: {
-            project: {
-              select: {
-                id: true,
-                title: true,
-              },
-            },
-          }
-        })
-      } catch (error) {
-        console.error(`Error processing file ${file.name}:`, error)
-        throw error
-      }
+    // Upload to Cloudinary
+    const uploadResponse = await new Promise<any>((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          resource_type: 'auto',
+          folder: `lsanalab/projects/${projectId}`,
+          public_id: customName.replace(/\.[^/.]+$/, ''), // Remove extension for public_id
+        },
+        (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        }
+      )
+
+      uploadStream.end(buffer)
     })
 
-    // Wait for all files to be processed
-    const savedFiles = await Promise.all(filePromises)
+    if (!uploadResponse || !uploadResponse.secure_url) {
+      throw new Error('File upload failed')
+    }
 
-    return NextResponse.json(savedFiles)
+    // Create file record in database
+    const fileRecord = await prisma.file.create({
+      data: {
+        name: customName,
+        url: uploadResponse.secure_url,
+        publicId: uploadResponse.public_id,
+        size: file.size,
+        type: file.type,
+        projectId: projectId as string,
+      },
+      include: {
+        project: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+    })
+
+    return NextResponse.json(fileRecord)
+
   } catch (error) {
-    console.error('Error in POST /api/files:', error)
+    console.error('File upload error:', error)
     
     // Handle specific error types
-    if (error instanceof CloudinaryError) {
-      return new NextResponse(JSON.stringify({ error: 'File upload failed. Please try again.' }), {
+    if (error && typeof error === 'object' && 'http_code' in error) {
+      // This is likely a Cloudinary error
+      return new NextResponse(JSON.stringify({ 
+        error: 'File upload failed. Please try again.',
+        details: (error as Error).message
+      }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
       })
     }
-    
-    if (error instanceof PrismaClientKnownRequestError) {
-      if (error.code === 'P2002') {
-        return new NextResponse(JSON.stringify({ error: 'A file with this name already exists' }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        })
-      }
-    }
-    
-    return new NextResponse(JSON.stringify({ error: 'Internal Server Error' }), {
+
+    // Generic error response
+    return new NextResponse(JSON.stringify({ 
+      error: 'An unexpected error occurred',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     })
