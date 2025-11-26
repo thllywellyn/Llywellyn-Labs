@@ -15,12 +15,15 @@ const transporter = nodemailer.createTransport({
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, subject, message } = body;
+    const { firstName, lastName, email, subject, message } = body;
+
+    // Combine first and last name
+    const name = `${firstName} ${lastName}`.trim();
 
     // Validate required fields
-    if (!name || !email || !message) {
+    if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(
-        { error: 'Name, email and message are required' },
+        { error: 'First name, last name, email and message are required' },
         { status: 400 }
       );
     }
