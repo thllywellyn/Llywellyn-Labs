@@ -1,0 +1,405 @@
+/* Profile Settings Page */
+
+.profile-settings {
+  background: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.profile-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.profile-header p {
+  font-size: 1.6rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.profile-container {
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--second-bg-color);
+  border-radius: 1rem;
+  padding: 2.5rem;
+}
+
+/* Profile Image Section */
+.profile-image-section {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  margin-bottom: 2.4rem;
+  padding-bottom: 2.4rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.image-preview {
+  flex-shrink: 0;
+}
+
+.image-preview img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--main-color);
+}
+
+.image-preview .placeholder {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(var(--main-color-rgb), 0.06);
+  border: 3px solid var(--main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.6rem;
+  color: var(--main-color);
+}
+
+.image-controls {
+  flex: 1;
+}
+
+.upload-btn {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  background: var(--main-color);
+  color: var(--bg-color);
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 600;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.upload-btn:hover {
+  background: var(--main-color-light, #FF6B1F);
+  transform: translateY(-2px);
+}
+
+.help-text {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  margin-top: 0.8rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 0.8rem 1.2rem;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.35rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.18s ease, border-bottom-color 0.18s ease;
+  opacity: 0.85;
+  font-weight: 600;
+}
+
+.tab-btn:hover {
+  opacity: 1;
+}
+
+.tab-btn.active {
+  opacity: 1;
+  border-bottom-color: var(--main-color);
+  color: var(--main-color);
+}
+
+/* Messages */
+.error-message {
+  padding: 1.2rem 1.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+}
+
+.success-message {
+  padding: 1.2rem 1.5rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+}
+
+/* Form Content */
+.form-content {
+  margin-bottom: 2rem;
+}
+
+.tab-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-content h3 {
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.section-hint {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  margin-bottom: 2rem;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.6rem;
+  color: var(--text-color);
+  font-size: 1.35rem;
+  font-family: inherit;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Select / Dropdown styling to match theme */
+.form-group select {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.6rem;
+  font-size: 1.35rem;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-color) 50%), linear-gradient(135deg, var(--text-color) 50%, transparent 50%);
+  background-position: calc(100% - 1.1rem) calc(1em + 0.2rem), calc(100% - 0.6rem) calc(1em + 0.2rem);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--main-color);
+  box-shadow: 0 0 0 4px rgba(var(--main-color-rgb), 0.06);
+}
+
+/* Try to style option background and color (limited by browsers)
+   This helps on some browsers and native selects. */
+.form-group select option {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--main-color);
+  box-shadow: 0 0 0 4px rgba(var(--main-color-rgb), 0.08);
+}
+
+.field-hint {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  opacity: 0.5;
+  margin-top: 0.5rem;
+}
+
+/* Form Row */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Chip / option styles for selectable goals */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.option-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font-size: 1.35rem;
+  transition: all 0.18s ease;
+}
+
+.option-chip:hover {
+  border-color: var(--main-color);
+  transform: translateY(-2px);
+}
+
+.option-chip.selected {
+  background: var(--main-color);
+  color: var(--bg-color);
+  border-color: var(--main-color);
+  box-shadow: 0 6px 16px rgba(var(--main-color-rgb), 0.12);
+}
+
+@media (max-width: 480px) {
+  .option-chip { padding: 0.5rem 0.8rem; font-size: 1.2rem; }
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-save {
+  padding: 0.95rem 1.8rem;
+  background: var(--main-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.btn-save:hover:not(:disabled) {
+  background: var(--main-color-light, #FF6B1F);
+  transform: translateY(-2px);
+}
+
+.btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1.5rem;
+  }
+
+  .profile-image-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .image-preview img,
+  .image-preview .placeholder {
+    width: 120px;
+    height: 120px;
+  }
+
+  .tabs {
+    gap: 0.5rem;
+  }
+
+  .tab-btn {
+    padding: 0.7rem 0.9rem;
+    font-size: 1.15rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .profile-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-settings {
+    padding: 1rem;
+  }
+
+  .profile-container {
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  .tabs {
+    gap: 0.3rem;
+    margin-bottom: 2rem;
+  }
+
+  .tab-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-save {
+    width: 100%;
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { formatDate } from '@/lib/utils'
 
 interface Project {
   id: string
@@ -79,7 +80,7 @@ export default function ProjectsPage() {
 
             <div className="project-meta">
               <span className="date">
-                Created {new Date(project.createdAt).toLocaleDateString()}
+                Created {formatDate(project.createdAt)}
               </span>
               <div className="flex gap-2">
                 <button className="view-details">

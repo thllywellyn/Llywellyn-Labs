@@ -14,6 +14,7 @@ interface PublicLayoutProps {
 
 export default function PublicLayout({ children, hideFooter = false }: PublicLayoutProps) {
   const { data: session } = useSession()
+  const [mounted, setMounted] = useState(false)
   const [theme, setTheme] = useState('dark')
   const [isScrolled, setIsScrolled] = useState(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
@@ -21,26 +22,30 @@ export default function PublicLayout({ children, hideFooter = false }: PublicLay
   const pathname = usePathname()
   const isDashboard = pathname?.startsWith('/dashboard')
 
+  // Initialize client-side state
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
+    setMounted(true)
     const savedTheme = localStorage.getItem('theme') || 'dark'
     setTheme(savedTheme)
     document.documentElement.setAttribute('data-theme', savedTheme)
   }, [])
 
   useEffect(() => {
+    if (!mounted) return
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [mounted])
+
+  useEffect(() => {
+    if (!mounted) return
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('auth') === 'login') {
       setIsAuthModalOpen(true);
     }
-  }, []);
+  }, [mounted]);
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
@@ -53,8 +58,11 @@ export default function PublicLayout({ children, hideFooter = false }: PublicLay
     setMobileMenuOpen(prev => !prev)
   }
 
+  // Prevent hydration mismatch by not rendering theme-dependent content until mounted
+  const displayTheme = mounted ? theme : 'dark'
+
   return (
-    <div data-theme={theme}>
+    <div data-theme={displayTheme}>
       {isAuthModalOpen && (
         <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
       )}
@@ -63,7 +71,7 @@ export default function PublicLayout({ children, hideFooter = false }: PublicLay
         <Link href="/" className="logo">
           <Image
             src={
-              theme === 'dark'
+              displayTheme === 'dark'
                 ? '/assets/LLYWELLYN LABS WHITE.png'
                 : '/assets/LLYWELLYN LABS BLACK.png'
             }
@@ -75,7 +83,7 @@ export default function PublicLayout({ children, hideFooter = false }: PublicLay
         </Link>
 
         <nav
-          className={`navbar ${theme === 'dark' ? 'text-white' : 'text-gray-900'} ${mobileMenuOpen ? 'active' : ''
+          className={`navbar ${displayTheme === 'dark' ? 'text-white' : 'text-gray-900'} ${mobileMenuOpen ? 'active' : ''
             }`}
         >
           <Link href="/#home" className="hover:text-orange-500 transition-colors">
@@ -84,7 +92,7 @@ export default function PublicLayout({ children, hideFooter = false }: PublicLay
           <Link href="/#services" className="hover:text-orange-500 transition-colors">
             Services
           </Link>
-          <Link href="/#portfolio" className="hover:text-orange-500 transition-colors">
+          <Link href="/portfolio" className="hover:text-orange-500 transition-colors">
             Portfolio
           </Link>
           <Link href="/#contact" className="hover:text-orange-500 transition-colors">
@@ -125,9 +133,9 @@ export default function PublicLayout({ children, hideFooter = false }: PublicLay
           <button
             className="theme-toggle"
             onClick={toggleTheme}
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label={displayTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {displayTheme === 'dark' ? '☀️' : '🌙'}
           </button>
 
           <button
@@ -214,7 +222,7 @@ export default function PublicLayout({ children, hideFooter = false }: PublicLay
             <Link href="/terms" className="hover:text-gray-300 mr-4">
               Terms & Conditions
             </Link>
-            <p>© {new Date().getFullYear()} Llywellyn Labs | All rights reserved</p>
+            <p>© 2024 Llywellyn Labs | All rights reserved</p>
           </div>
         </footer>
       )}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import { formatDate } from '@/lib/utils'
 
 interface Project {
   id: string
@@ -124,10 +125,10 @@ export default function AdminProjectsPage() {
                     </select>
                   </td>
                   <td className="p-4">
-                    {new Date(project.createdAt).toLocaleDateString()}
+                    {formatDate(project.createdAt)}
                   </td>
                   <td className="p-4">
-                    {new Date(project.updatedAt).toLocaleDateString()}
+                    {formatDate(project.updatedAt)}
                   </td>
                   <td className="p-4">
                     <button 

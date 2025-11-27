@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import Modal from '@/components/Modal'
+import { formatDate } from '@/lib/utils'
 import '@/styles/files.css'
 
 interface UploadingFile {
@@ -260,7 +261,7 @@ export default function FilesPage() {
 
             <div className="file-meta">
               <span className="date">
-                {new Date(file.createdAt).toLocaleDateString()}
+                {formatDate(file.createdAt)}
               </span>
               <div className="file-actions">
                 <a

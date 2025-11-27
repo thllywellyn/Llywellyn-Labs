@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import { formatDate } from '@/lib/utils'
 
 interface User {
   id: string
@@ -115,7 +116,7 @@ export default function AdminUsersPage() {
                     </span>
                   </td>
                   <td className="p-4">
-                    {new Date(user.createdAt).toLocaleDateString()}
+                    {formatDate(user.createdAt)}
                   </td>
                   <td className="p-4">
                     <button 

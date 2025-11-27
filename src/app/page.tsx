@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import PublicLayout from '@/components/layouts/PublicLayout'
 import ContactForm from '@/components/ContactForm'
 
@@ -93,6 +94,18 @@ export default function Home() {
               <h3>Email Consultation</h3>
               <p>Custom email setup with your domain for a professional business image and reliable communication.</p>
             </div>
+          </div>
+        </section>
+
+        {/* Portfolio Showcase Section */}
+        <section className="portfolio-showcase-preview" id="portfolio">
+          <h2 className="section-title">Featured <span>Work</span></h2>
+          <p className="section-subtitle">Explore a selection of my recent projects and campaigns</p>
+          <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+            <Link href="/portfolio" className="btn" style={{ display: 'inline-block' }}>
+              View Full Portfolio
+              <i className='bx bx-right-arrow-alt'></i>
+            </Link>
           </div>
         </section>
 

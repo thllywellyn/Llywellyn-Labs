@@ -13,3 +13,17 @@ export function generateOTP(length: number = 6): string {
   }
   return OTP;
 }
+
+export function formatDate(date: string | Date, locale: string = 'en-US'): string {
+  try {
+    const d = typeof date === 'string' ? new Date(date) : date;
+    // Return a consistent format that won't vary between server and client
+    return d.toLocaleDateString(locale, {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  } catch {
+    return 'Invalid date';
+  }
+}

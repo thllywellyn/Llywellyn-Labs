@@ -180,33 +180,26 @@ export default function OnboardingPage() {
                 <label className="form-label">
                   What services are you interested in?
                 </label>
-                <div className="checkbox-group">
-                  {goals.map((goal) => (
-                    <div key={goal} className="checkbox-item">
-                      <label htmlFor={goal} className="checkbox-label">
-                        {goal}
-                      </label>
-                      <input
-                        type="checkbox"
-                        id={goal}
-                        className="checkbox-input"
-                        checked={formData.goals.includes(goal)}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setFormData({
-                              ...formData,
-                              goals: [...formData.goals, goal],
-                            })
+                <div className="chip-group">
+                  {goals.map((goal) => {
+                    const checked = formData.goals.includes(goal)
+                    return (
+                      <button
+                        type="button"
+                        key={goal}
+                        className={`option-chip ${checked ? 'selected' : ''}`}
+                        onClick={() => {
+                          if (!formData.goals.includes(goal)) {
+                            setFormData({ ...formData, goals: [...formData.goals, goal] })
                           } else {
-                            setFormData({
-                              ...formData,
-                              goals: formData.goals.filter((g) => g !== goal),
-                            })
+                            setFormData({ ...formData, goals: formData.goals.filter((g) => g !== goal) })
                           }
                         }}
-                      />
-                    </div>
-                  ))}
+                      >
+                        <span>{goal}</span>
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
             )}

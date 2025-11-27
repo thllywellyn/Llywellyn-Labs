@@ -135,3 +135,49 @@
     height: 15rem;
   }
 }
+
+/* Portfolio Showcase Preview */
+.portfolio-showcase-preview {
+  padding: 8rem 9% 4rem;
+  text-align: center;
+  background: var(--bg-color);
+  min-height: auto;
+}
+
+.portfolio-showcase-preview h2 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.section-subtitle {
+  font-size: 1.6rem;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+.portfolio-showcase-preview .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: var(--main-color);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.portfolio-showcase-preview .btn:hover {
+  background: var(--main-color-light, #FF6B1F);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .portfolio-showcase-preview {
+    padding: 3rem 5%;
+  }
+}
+

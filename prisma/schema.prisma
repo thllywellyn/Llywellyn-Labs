@@ -10,17 +10,48 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  email         String    @unique
-  password      String
-  role          String    @default("CLIENT")
-  businessDetails Json?
-  onboardingCompleted Boolean @default(false)
-  emailVerified DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  projects      Project[]
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  name                String
+  email               String    @unique
+  password            String
+  role                String    @default("CLIENT")
+  
+  // Profile Information
+  displayName         String?
+  profileImage        String?   // Cloudinary URL
+  profileImagePublicId String? // Cloudinary public ID for deletion
+  bio                 String?
+  
+  // Contact Information
+  phone               String?
+  companyName         String?
+  jobTitle            String?
+  website             String?
+  
+  // Address Information
+  addressLine1        String?
+  addressLine2        String?
+  city                String?
+  state               String?
+  postalCode          String?
+  country             String?
+  
+  // Social Links
+  linkedin            String?
+  twitter             String?
+  instagram           String?
+  github              String?
+  
+  // Preferences
+  emailNotifications  Boolean   @default(true)
+  marketingEmails     Boolean   @default(false)
+  
+  businessDetails     Json?
+  onboardingCompleted Boolean   @default(false)
+  emailVerified       DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  projects            Project[]
 }
 
 model Project {
