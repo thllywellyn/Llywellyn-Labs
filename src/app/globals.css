@@ -2,6 +2,11 @@
 @import '../styles/base.css';
 @import '../styles/utils.css';
 
+/* Use a stable system font stack to avoid external font fetches during build */
+html, body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
 /* Import layout components */
 @import '../styles/navbar.css';
 @import '../styles/home.css';

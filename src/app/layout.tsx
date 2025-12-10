@@ -1,18 +1,12 @@
 import './globals.css'
 import { SessionProvider } from '../components/SessionProvider'
 import { getServerSession } from 'next-auth'
-import { Inter, Poppins } from 'next/font/google'
 import { authOptions } from '@/lib/auth'
 import Script from 'next/script'
 import { ServiceWorkerRegistration } from '@/components/ServiceWorkerRegistration'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
-const inter = Inter({ subsets: ['latin'] })
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
-  display: 'swap',
-})
+// Use system font stack instead of fetching Google fonts during build
 
 export const viewport = {
   themeColor: '#FF4500',
@@ -69,7 +63,7 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions)
   return (
-    <html lang="en" className={`${poppins.variable} h-full`}>
+    <html lang="en" className={`h-full`}>
       <head>
         <link rel="manifest" href="/assets/site.webmanifest" />
         <meta name="theme-color" content="#FF4500" />
