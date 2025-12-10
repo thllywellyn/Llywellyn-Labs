@@ -75,6 +75,15 @@
 /* Home Section Updates */
 .home-content h3 span.highlight {
   color: var(--main-color);
+  /* Ensure highlighted span matches the h3 size (overrides global span rule) */
+  font-size: var(--font-size-h3);
+  line-height: 1.15;
+}
+
+/* Ensure any span inside home h3 stays at h3 size (covers non-highlight spans) */
+.home-content h3 span {
+  font-size: var(--font-size-h3);
+  line-height: 1.15;
 }
 
 @media (max-width: 991px) {
@@ -156,23 +165,27 @@
 }
 
 .portfolio-showcase-preview .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 2rem;
+  /* Match global .btn styling for consistency */
+  display: inline-block;
+  padding: 1rem 2.8rem;
   background: var(--main-color);
-  color: #fff;
+  border-radius: 4rem;
+  box-shadow: 0 0 1rem var(--main-color);
+  font-size: 1.6rem;
+  color: var(--second-bg-color);
+  letter-spacing: .1rem;
+  font-weight: 600;
+  border: .2rem solid transparent;
+  transition: .5s ease;
   text-decoration: none;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  align-items: center;
 }
 
 .portfolio-showcase-preview .btn:hover {
-  background: var(--main-color-light, #FF6B1F);
-  transform: translateY(-3px);
+  background: transparent;
+  color: var(--main-color);
+  border-color: var(--main-color);
+  box-shadow: none;
 }
 
 @media (max-width: 768px) {

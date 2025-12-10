@@ -21,6 +21,14 @@
   --border-color: rgba(255, 255, 255, 0.1);
   --hover-color: rgba(255, 255, 255, 0.2);
   --main-color-rgb: 255, 69, 0;
+
+  /* Typography scale (home page as reference) */
+  --font-size-base: 1.6rem; /* paragraphs, small text */
+  --font-size-h1: 5.6rem; /* home h1 */
+  --font-size-h2: 4rem;  /* section titles */
+  --font-size-h3: 3.2rem; /* home h3 / large headings */
+  --line-height-base: 1.6;
+  --container-max-width: 1200px;
 }
 
 [data-theme="light"] {
@@ -39,7 +47,32 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
 }
+
+/* Typography: normalize headings and paragraphs across the site */
+h1,h2,h3,h4,h5,h6{
+  color: var(--text-color);
+  margin: 0 0 1.2rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4 { font-size: 2.4rem; }
+h5 { font-size: 1.8rem; }
+h6 { font-size: 1.6rem; }
+
+p, li, input, button, a {
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+}
+
+/* Make section titles consistent */
+.section-title { font-size: var(--font-size-h2); }
 
 body::after {
   content: '';
@@ -61,13 +94,14 @@ section {
 /* Section styles */
 .section-title {
   text-align: center;
-  font-size: 4rem;
+  font-size: var(--font-size-h2);
   margin-bottom: 5rem;
   color: var(--text-color);
 }
 
 .section-title span {
   color: var(--main-color);
+  font-size: var(--font-size-h2);
 }
 
 @keyframes fadeIn {

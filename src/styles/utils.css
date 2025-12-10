@@ -33,7 +33,7 @@ section {
 
 .section-title {
   text-align: center;
-  font-size: 4rem;
+  font-size: var(--font-size-h2);
   margin-bottom: 5rem;
   color: var(--text-color);
 }
@@ -225,7 +225,7 @@ section {
   }
 
   .pricing-list li {
-    font-size: 1.4rem;
+    font-size: var(--font-size-base);
     padding: 0.8rem;
   }
 }

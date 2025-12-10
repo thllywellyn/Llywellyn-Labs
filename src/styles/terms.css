@@ -17,29 +17,29 @@
 }
 
 .terms-content h1 {
-    font-size: 3.6rem;
+    font-size: var(--font-size-h1);
     font-weight: 700;
     margin-bottom: 2.4rem;
     color: var(--text-color);
 }
 
 .terms-content h2 {
-    font-size: 2.4rem;
+    font-size: var(--font-size-h2);
     font-weight: 600;
     margin: 3.2rem 0 1.6rem;
     color: var(--text-color);
 }
 
 .terms-content h3 {
-    font-size: 1.8rem;
+    font-size: var(--font-size-h3);
     font-weight: 600;
     margin: 2rem 0 1rem;
     color: var(--text-color);
 }
 
 .terms-content p {
-    font-size: 1.6rem;
-    line-height: 1.6;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     margin-bottom: 1.6rem;
     color: var(--text-color);
 }
@@ -50,8 +50,8 @@
 }
 
 .terms-content li {
-    font-size: 1.6rem;
-    line-height: 1.6;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     margin-bottom: 0.8rem;
     color: var(--text-color);
 }
@@ -64,8 +64,8 @@
 }
 
 .terms-intro {
-    font-size: 1.7rem;
-    line-height: 1.7;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     margin-bottom: 2.5rem;
 }
 
@@ -89,8 +89,8 @@
 .terms-list li {
     margin-bottom: 1rem;
     padding-left: 2rem;
-    font-size: 1.6rem;
-    line-height: 1.7;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     position: relative;
 }
 
@@ -129,14 +129,14 @@
     }
 
     .terms-content h1 {
-        font-size: 2rem;
+        font-size: calc(var(--font-size-h1) * 0.36);
     }
 
     .terms-content h2 {
-        font-size: 1.5rem;
+        font-size: calc(var(--font-size-h2) * 0.375);
     }
 
     .terms-content h3 {
-        font-size: 1.3rem;
+        font-size: calc(var(--font-size-h3) * 0.40625);
     }
 }
