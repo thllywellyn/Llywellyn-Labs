@@ -173,7 +173,7 @@ export default function ContactForm() {
       ></textarea>
 
       {/* Cloudflare Turnstile widget container */}
-      <div ref={widgetRef} style={{ margin: '16px 0' }} />
+      <div className="cft" ref={widgetRef} style={{ margin: '16px 0' }} />
       <button type="submit" className="btn" disabled={isLoading}>
         {isLoading ? 'Sending...' : 'Send Message'}
       </button>

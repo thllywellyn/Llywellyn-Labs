@@ -91,6 +91,10 @@
   color: #ff0000;
   border: 1px solid #ff0000;
 }
+.cft{
+  justify-content: center;
+  display: grid;
+}
 
 @keyframes fadeIn {
   from {
