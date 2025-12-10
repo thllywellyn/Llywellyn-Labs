@@ -4,7 +4,6 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import Script from 'next/script'
 import { ServiceWorkerRegistration } from '@/components/ServiceWorkerRegistration'
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // Use system font stack instead of fetching Google fonts during build
 

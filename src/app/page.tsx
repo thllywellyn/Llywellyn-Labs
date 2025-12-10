@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import PublicLayout from '@/components/layouts/PublicLayout'
 import ContactForm from '@/components/ContactForm'
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 export default function Home() {
   const [loading, setLoading] = useState(true)
 
