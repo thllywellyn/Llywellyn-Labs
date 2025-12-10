@@ -65,6 +65,10 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`h-full`}>
       <head>
+        {/* Preconnect and load Google Fonts at runtime (avoids build-time fetch) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="manifest" href="/assets/site.webmanifest" />
         <meta name="theme-color" content="#FF4500" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
